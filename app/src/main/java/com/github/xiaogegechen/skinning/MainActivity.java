@@ -3,7 +3,9 @@ package com.github.xiaogegechen.skinning;
 import android.content.Intent;
 import android.os.Bundle;
 
-public class MainActivity extends BaseActivity {
+import com.github.xiaogegechen.library.base.SkinningBaseActivity;
+
+public class MainActivity extends SkinningBaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -13,5 +15,6 @@ public class MainActivity extends BaseActivity {
             Intent intent = new Intent (MainActivity.this, SecondActivity.class);
             startActivity (intent);
         });
+        getSupportFragmentManager ().beginTransaction ().replace (R.id.fragment, new TestFragment ()).commit ();
     }
 }

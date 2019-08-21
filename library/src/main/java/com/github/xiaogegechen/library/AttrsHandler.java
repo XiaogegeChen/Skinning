@@ -1,7 +1,6 @@
 package com.github.xiaogegechen.library;
 
 import android.content.res.Resources;
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -11,8 +10,6 @@ import com.github.xiaogegechen.library.manager.ResourcesManager;
 import java.util.List;
 
 public abstract class AttrsHandler {
-
-    private static final String TAG = Consts.SKINNING_TAG;
 
     /**
      * 处理view的属性值，从而更新view，这个方法需要你从attrList中拿到你需要处理的
@@ -69,7 +66,7 @@ public abstract class AttrsHandler {
         int newId = currentRes.getIdentifier (resName, "color", currentPkgName);
         if(newId == 0){
             // 皮肤包没有设置这个颜色
-            Log.d (TAG, "no color find in skin file, so use origin color!");
+            LogUtils.d ("no color find in skin file, so use origin color!");
             return originColor;
         }
         return currentRes.getColor (newId);

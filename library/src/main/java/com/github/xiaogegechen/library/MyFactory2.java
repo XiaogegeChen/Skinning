@@ -17,25 +17,37 @@ import java.util.List;
  */
 public class MyFactory2 implements LayoutInflater.Factory2 {
 
-    private static final String TAG = "MyFactory2";
+    private static volatile MyFactory2 sInstance;
 
-    public MyFactory2(){
+    public static MyFactory2 getInstance() {
+        if (sInstance == null) {
+            synchronized (MyFactory2.class){
+                if (sInstance == null) {
+                    sInstance = new MyFactory2 ();
+                }
+            }
+        }
+        return sInstance;
     }
 
+    private MyFactory2(){}
+
     @Override
-    public View onCreateView(View parent, String name, Context context, AttributeSet attrs) {
+    public View onCreateView(String name, Context context, AttributeSet attrs) {
         // 交给framework处理
         return null;
     }
 
     @Override
-    public View onCreateView(String name, Context context, AttributeSet attrs) {
+    public View onCreateView(View parent, String name, Context context, AttributeSet attrs) {
         // 是否支持换肤
         boolean enable = attrs.getAttributeBooleanValue (Consts.NAMESPACE, Consts.ATTR_ENABLE, false);
         // 不支持就返回null,交给framework处理
         if(!enable){
+            LogUtils.d ("a view whose name is:" + name + " does not support skinning!");
             return null;
         }
+        LogUtils.d ("a view whose name is:" + name + " support skinning!");
         // 创建这个view对象
         View view = ViewParser.createViewFromTag (context, name, attrs);
         // 缓存view

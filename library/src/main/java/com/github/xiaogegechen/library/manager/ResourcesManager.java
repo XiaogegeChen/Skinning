@@ -8,6 +8,7 @@ import android.content.res.Resources;
 
 import com.github.xiaogegechen.library.Consts;
 import com.github.xiaogegechen.library.ISkinningListener;
+import com.github.xiaogegechen.library.LogUtils;
 
 import java.io.File;
 import java.lang.reflect.Method;
@@ -45,6 +46,7 @@ public class ResourcesManager {
     public void init(Context context){
         mContext = context;
         mOriginRes = mContext.getResources ();
+        mCurrentRes = mOriginRes;
     }
 
     public Resources getOriginRes() {
@@ -62,17 +64,22 @@ public class ResourcesManager {
     /**
      * 从文件中加载资源并设置为当前的资源
      * @param skinFile 皮肤包文件
+     * @return 加载成功返回true,失败返回false
      */
-    public void loadAndSetRes(File skinFile, ISkinningListener listener){
+    public boolean loadAndSetRes(File skinFile, ISkinningListener listener){
         Resources res = loadResFromFile (skinFile, listener);
         if (res != null) {
             mCurrentRes = res;
+            return true;
         }
+
+        return false;
     }
 
     // 从文件中加载资源
     private Resources loadResFromFile(File skinFile, ISkinningListener listener){
         if(skinFile == null || !skinFile.exists ()){
+            LogUtils.d (Consts.FILE_ERROR);
             listener.onFailure (Consts.FILE_ERROR);
             return null;
         }
@@ -86,6 +93,7 @@ public class ResourcesManager {
             return new Resources (assetManager, mOriginRes.getDisplayMetrics (), mOriginRes.getConfiguration ());
         } catch (Exception e) {
             e.printStackTrace ();
+            LogUtils.d (Consts.EXCEPTION_ERROR);
             listener.onFailure (Consts.EXCEPTION_ERROR);
         }
         return null;

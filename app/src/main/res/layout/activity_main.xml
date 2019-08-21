@@ -34,4 +34,9 @@
         android:textColor="@color/main_button_color"
         skinning:enable="true"/>
 
+    <FrameLayout
+        android:id="@+id/fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 </LinearLayout>

@@ -6,12 +6,13 @@ import android.widget.Toast;
 
 import com.github.xiaogegechen.library.ISkinningListener;
 import com.github.xiaogegechen.library.Skinning;
+import com.github.xiaogegechen.library.base.SkinningBaseActivity;
 
 import java.io.File;
 
-public class SecondActivity extends BaseActivity {
+public class SecondActivity extends SkinningBaseActivity {
 
-    private static final String TAG = "SecondActivity";
+    private static final String TAG = Consts.TAG;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

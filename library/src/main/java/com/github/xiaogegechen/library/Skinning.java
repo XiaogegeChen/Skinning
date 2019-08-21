@@ -1,9 +1,6 @@
 package com.github.xiaogegechen.library;
 
 import android.content.Context;
-import android.view.LayoutInflater;
-
-import androidx.core.view.LayoutInflaterCompat;
 
 import com.github.xiaogegechen.library.impl.SkinningListenerAdapter;
 import com.github.xiaogegechen.library.impl.TextColorHandler;
@@ -32,7 +29,6 @@ public enum Skinning {
         mApplicationContext = context;
         initAttrsHandlerManager ();
         initResourcesManager ();
-        initMyFactory2 ();
     }
 
     private void initAttrsHandlerManager(){
@@ -41,10 +37,6 @@ public enum Skinning {
 
     private void initResourcesManager(){
         ResourcesManager.getInstance ().init (mApplicationContext);
-    }
-
-    private void initMyFactory2(){
-        LayoutInflaterCompat.setFactory2 (LayoutInflater.from (mApplicationContext), new MyFactory2 ());
     }
 
     /**
@@ -77,9 +69,11 @@ public enum Skinning {
             listener = new SkinningListenerAdapter ();
         }
         // 加载并更换当前资源
-        ResourcesManager.getInstance ().loadAndSetRes (newSkinFile, listener);
-        // 更新缓存的view
-        CachedViewManager.getInstance ().refreshCachedView (AttrsHandlerManager.getInstance ().getAttrsHandlerList (), listener);
+        boolean isLoadSuccess = ResourcesManager.getInstance ().loadAndSetRes (newSkinFile, listener);
+        if(isLoadSuccess){
+            // 更新缓存的view
+            CachedViewManager.getInstance ().refreshCachedView (AttrsHandlerManager.getInstance ().getAttrsHandlerList (), listener);
+        }
     }
 
     /**

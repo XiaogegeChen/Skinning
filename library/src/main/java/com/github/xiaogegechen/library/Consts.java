@@ -22,4 +22,9 @@ public class Consts {
 
     // log tag
     public static final String SKINNING_TAG = "skinning";
+
+    public static final String SKINNING_LOG_PREFIX = "Skinning >>>> ";
+
+    // log开关
+    public static final boolean LOG = true;
 }

@@ -1,12 +1,11 @@
 package com.github.xiaogegechen.library.manager;
 
-import android.util.Log;
 import android.view.View;
 
 import com.github.xiaogegechen.library.Attr;
 import com.github.xiaogegechen.library.AttrsHandler;
-import com.github.xiaogegechen.library.Consts;
 import com.github.xiaogegechen.library.ISkinningListener;
+import com.github.xiaogegechen.library.LogUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,8 +15,6 @@ import java.util.Map;
  * 缓存的支持换肤的view集合，单例
  */
 public class CachedViewManager {
-
-    private static final String TAG = Consts.SKINNING_TAG;
 
     private static volatile CachedViewManager sInstance;
 
@@ -62,13 +59,14 @@ public class CachedViewManager {
      * @param listener 换肤监听
      */
     public void refreshCachedView(List<AttrsHandler> handlerList, ISkinningListener listener){
-        Log.d (TAG, "cachedMap is -> " + mMap);
+        LogUtils.d ("cachedMap is -> " + mMap);
         for (View view : mMap.keySet ()) {
             List<Attr> attrList = mMap.get (view);
             for (AttrsHandler attrsHandler : handlerList) {
                 attrsHandler.handleAttrs (view, attrList);
             }
         }
+        LogUtils.d ("refresh done!");
         listener.onSuccess ();
     }
 }
