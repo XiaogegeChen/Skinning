@@ -3,7 +3,7 @@ package com.github.xiaogegechen.library.impl;
 import android.view.View;
 import android.widget.TextView;
 
-import com.github.xiaogegechen.library.Attr;
+import com.github.xiaogegechen.library.model.Attr;
 import com.github.xiaogegechen.library.AttrsHandler;
 
 import java.util.List;

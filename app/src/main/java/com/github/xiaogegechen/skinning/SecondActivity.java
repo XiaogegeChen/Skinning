@@ -34,5 +34,6 @@ public class SecondActivity extends SkinningBaseActivity {
                 }
             });
         });
+        getSupportFragmentManager ().beginTransaction ().replace (R.id.fragment_2, new TestFragment ()).commit ();
     }
 }

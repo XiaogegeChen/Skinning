@@ -1,4 +1,4 @@
-package com.github.xiaogegechen.library;
+package com.github.xiaogegechen.library.model;
 
 /**
  * view的属性

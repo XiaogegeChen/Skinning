@@ -4,9 +4,8 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.LayoutInflaterCompat;
 
-import com.github.xiaogegechen.library.MyFactory2;
+import com.github.xiaogegechen.library.Skinning;
 
 /**
  * AppCompatActivity基类，使用者可以直接继承SkinningBaseActivity
@@ -17,7 +16,14 @@ import com.github.xiaogegechen.library.MyFactory2;
 public class SkinningBaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        LayoutInflaterCompat.setFactory2 (getLayoutInflater (), MyFactory2.getInstance ());
+        // 替换Factory2
+        Skinning.INSTANCE.attach (this);
         super.onCreate (savedInstanceState);
+    }
+
+    @Override
+    protected void onDestroy() {
+        Skinning.INSTANCE.detach (this);
+        super.onDestroy ();
     }
 }

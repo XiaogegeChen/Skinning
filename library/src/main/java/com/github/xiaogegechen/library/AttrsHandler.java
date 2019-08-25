@@ -6,6 +6,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 
 import com.github.xiaogegechen.library.manager.ResourcesManager;
+import com.github.xiaogegechen.library.model.Attr;
 
 import java.util.List;
 

@@ -1,5 +1,6 @@
 package com.github.xiaogegechen.library;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -7,6 +8,7 @@ import android.view.View;
 
 import com.github.xiaogegechen.library.manager.AttrsHandlerManager;
 import com.github.xiaogegechen.library.manager.CachedViewManager;
+import com.github.xiaogegechen.library.model.Attr;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,20 +19,11 @@ import java.util.List;
  */
 public class MyFactory2 implements LayoutInflater.Factory2 {
 
-    private static volatile MyFactory2 sInstance;
+    private Activity mActivity;
 
-    public static MyFactory2 getInstance() {
-        if (sInstance == null) {
-            synchronized (MyFactory2.class){
-                if (sInstance == null) {
-                    sInstance = new MyFactory2 ();
-                }
-            }
-        }
-        return sInstance;
+    public MyFactory2(Activity activity) {
+        mActivity = activity;
     }
-
-    private MyFactory2(){}
 
     @Override
     public View onCreateView(String name, Context context, AttributeSet attrs) {
@@ -64,7 +57,7 @@ public class MyFactory2 implements LayoutInflater.Factory2 {
         }
         List<Attr> attrList = convertAttributeSet2AttrList (attrs);
         // 缓存view
-        CachedViewManager.getInstance ().addView (view, attrList);
+        CachedViewManager.getInstance ().addViewToTarget (mActivity, view, attrList);
     }
 
     // 把attrs转化为List<Attr>
@@ -89,4 +82,5 @@ public class MyFactory2 implements LayoutInflater.Factory2 {
             attrsHandler.handleAttrs (view, attrList);
         }
     }
+
 }
