@@ -14,7 +14,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 用于管理缓存的支持换肤的view集合，
+ * 用于管理缓存的支持换肤的view集合，存储结构为：
+ * Map<Activity, Map<View, List<Attr>>> activity为组，Map<View, List<Attr>>是改组的所有缓存的view及其属性
  * 1. 当页面加载时，需要将该页面支持换肤的view都进行缓存，以便在换肤后全部更新
  * 2. 当页面销毁时，则需要将该页面上所有的支持换肤的view都从缓存里移除，避免内存泄露
  */
@@ -39,6 +40,12 @@ public class CachedViewManager {
         mMap = new HashMap<> ();
     }
 
+    /**
+     * 向特定的分组添加view
+     * @param target activity,组
+     * @param view 要添加的view
+     * @param attrs 要添加view的属性
+     */
     public void addViewToTarget(Activity target, View view, List<Attr> attrs){
         if(!mMap.containsKey (target)){
             mMap.put (target, new HashMap<> ());
@@ -53,6 +60,11 @@ public class CachedViewManager {
         }
     }
 
+    /**
+     * 从特定分组种删除特定的view
+     * @param target activity,组
+     * @param view 要删除的view
+     */
     public void removeViewFromTarget(Activity target, View view){
         if(!mMap.containsKey (target)){
             return;
@@ -73,6 +85,10 @@ public class CachedViewManager {
         }
     }
 
+    /**
+     * 删除特定的分组
+     * @param target activity,组
+     */
     public void removeAllViewsFromTarget(Activity target){
         if(!mMap.containsKey (target)){
             return;

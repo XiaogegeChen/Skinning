@@ -1,6 +1,7 @@
 package com.github.xiaogegechen.library;
 
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -55,7 +56,7 @@ public abstract class AttrsHandler {
     /**
      * 从当前的皮肤包中拿到颜色属性值（当前皮肤包中R.class中id）
      * @param resId 原来xml文件中颜色的属性值(原R.class文件中id)
-     * @return 当前皮肤包中R.class中id
+     * @return 当前皮肤包中的颜色
      */
     protected int getColor(int resId){
         Resources originRes= ResourcesManager.getInstance ().getOriginRes ();
@@ -71,5 +72,27 @@ public abstract class AttrsHandler {
             return originColor;
         }
         return currentRes.getColor (newId);
+    }
+
+    /**
+     * 从当前皮肤包拿到尺寸值（px）
+     * @param resId 原尺寸资源id
+     * @return 当前皮肤包中尺寸
+     */
+    protected int getDimensionPixelSize(int resId){
+        Resources originRes= ResourcesManager.getInstance ().getOriginRes ();
+        Resources currentRes = ResourcesManager.getInstance ().getCurrentRes ();
+        String currentPkgName = ResourcesManager.getInstance ().getCurrentPkgName ();
+        int oldDimenPixelSize = originRes.getDimensionPixelSize (resId);
+        String resName = originRes.getResourceEntryName (resId);
+        int newId = currentRes.getIdentifier (resName, "dimen", currentPkgName);
+        if(newId == 0){
+            return oldDimenPixelSize;
+        }
+        return currentRes.getDimensionPixelSize (newId);
+    }
+
+    protected Drawable getDrawable(){
+        return null;
     }
 }

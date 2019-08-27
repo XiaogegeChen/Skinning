@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_size">70sp</dimen>
+    <dimen name="magrin_left">30dp</dimen>
+
+    <string name="button_title">已经换肤的跳转</string>
+</resources>

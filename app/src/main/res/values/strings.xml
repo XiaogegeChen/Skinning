@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Skinning</string>
+    <string name="button_title">跳转</string>
 </resources>

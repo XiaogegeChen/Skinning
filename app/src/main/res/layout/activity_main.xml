@@ -10,7 +10,8 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:textSize="20sp"
+        android:id="@+id/text_view_1"
+        android:textSize="@dimen/text_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!"
@@ -25,11 +26,24 @@
         android:textColor="@color/main_text_1_color"
         skinning:enable="true"/>
 
+    <ImageView
+        skinning:enable="true"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:src="@color/colorAccent"/>
+
+    <ImageView
+        skinning:enable="true"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/image_test"/>
+
     <Button
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="跳转"
+        android:text="@string/button_title"
+        android:layout_marginLeft="@dimen/magrin_left"
         android:textSize="20sp"
         android:textColor="@color/main_button_color"
         skinning:enable="true"/>

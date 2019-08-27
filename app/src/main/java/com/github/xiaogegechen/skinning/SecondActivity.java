@@ -13,6 +13,8 @@ import java.io.File;
 public class SecondActivity extends SkinningBaseActivity {
 
     private static final String TAG = Consts.TAG;
+//    private static final String FILE = "resources.arsc";
+    private static final String FILE = "skin_pkg-release.skin";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +22,7 @@ public class SecondActivity extends SkinningBaseActivity {
         setContentView (R.layout.activity_second);
         findViewById (R.id.change).setOnClickListener (v -> {
             File cacheDir = getExternalCacheDir ();
-            File skinFile = new File (cacheDir, "skin_pkg-release.skin");
+            File skinFile = new File (cacheDir, FILE);
             Skinning.INSTANCE.switchToNewSkin (skinFile, new ISkinningListener () {
                 @Override
                 public void onSuccess() {
