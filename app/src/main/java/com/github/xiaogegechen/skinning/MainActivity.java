@@ -2,31 +2,53 @@ package com.github.xiaogegechen.skinning;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 
+import com.github.xiaogegechen.library.Skinning;
 import com.github.xiaogegechen.library.base.SkinningBaseActivity;
+import com.github.xiaogegechen.library.model.Attr;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends SkinningBaseActivity {
 
-    private static final String TAG = "MainActivity";
-    private TextView mTextView;
+    private static final List<String> LIST;
+
+    static {
+        LIST = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            LIST.add(i + " hello");
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate (savedInstanceState);
         setContentView (R.layout.activity_main);
-        mTextView = findViewById (R.id.text_view_1);
-        findViewById (R.id.button).setOnClickListener (v -> {
-            Intent intent = new Intent (MainActivity.this, SecondActivity.class);
-            startActivity (intent);
+
+        findViewById(R.id.button).setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+            startActivity(intent);
         });
-        getSupportFragmentManager ().beginTransaction ().replace (R.id.fragment, new TestFragment ()).commit ();
-        float dimension = getResources ().getDimension (R.dimen.text_size);
-        int dimensionPixelSize = getResources ().getDimensionPixelSize (R.dimen.text_size);
-        float textSize = mTextView.getTextSize ();
-        Log.d (TAG, "dimension -> " + dimension);
-        Log.d (TAG, "dimensionPixelSize -> " + dimensionPixelSize);
-        Log.d (TAG, "textSize -> " + textSize);
+
+        // 测试listView
+//        ListView listView = findViewById(R.id.list_view);
+//        listView.setAdapter(new MyAdapter(LIST));
+
+        // 测试动态添加的view
+        List<Attr> attrs = new ArrayList<>();
+
+        Button button = new Button(getApplicationContext());
+        button.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        button.setText(getText(R.string.main_text_0_text));
+        attrs.add(new Attr("text", R.string.main_text_0_text));
+
+        Skinning.INSTANCE.addView(this, button, attrs);
+        LinearLayout root = findViewById(R.id.root);
+        root.addView(button);
     }
 }

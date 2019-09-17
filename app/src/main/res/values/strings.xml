@@ -1,4 +1,21 @@
 <resources>
     <string name="app_name">Skinning</string>
     <string name="button_title">跳转</string>
+
+    <string-array name="string_array_test">
+        <item>string_0</item>
+        <item>string_1</item>
+    </string-array>
+
+    <integer-array name="int_array_test">
+        <item>20</item>
+        <item>30</item>
+    </integer-array>
+
+    <integer name="integer_test">23</integer>
+
+    <bool name="bool_test">false</bool>
+
+    <fraction name="fraction_test">74%</fraction>
+
 </resources>

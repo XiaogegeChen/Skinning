@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:skinning="http://schemas.android.com/android/skin"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/list_view_item_text_view"
+        android:background="@color/main_text_0_bg_color"
+        android:padding="@dimen/main_text_0_padding"
+        android:textSize="@dimen/main_text_0_text_size"
+        android:textColor="@color/main_text_0_text_color"
+        android:text="@string/main_text_0_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        skinning:enable="true"/>
+</LinearLayout>

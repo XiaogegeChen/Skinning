@@ -13,6 +13,6 @@ public class SkinningBaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate ();
-        Skinning.INSTANCE.init (getApplicationContext ());
+        Skinning.INSTANCE.init (getApplicationContext (), true);
     }
 }

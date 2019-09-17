@@ -6,7 +6,6 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 
-import com.github.xiaogegechen.library.manager.ResourcesManager;
 import com.github.xiaogegechen.library.model.Attr;
 
 import java.util.List;
@@ -59,9 +58,9 @@ public abstract class AttrsHandler {
      * @return 当前皮肤包中的颜色
      */
     protected int getColor(int resId){
-        Resources originRes= ResourcesManager.getInstance ().getOriginRes ();
-        Resources currentRes = ResourcesManager.getInstance ().getCurrentRes ();
-        String currentPkgName = ResourcesManager.getInstance ().getCurrentPkgName ();
+        Resources originRes= ResourcesManager.getInstance ().mOriginRes;
+        Resources currentRes = ResourcesManager.getInstance ().mCurrentRes;
+        String currentPkgName = ResourcesManager.getInstance ().mCurrentPkgName;
         int originColor = originRes.getColor (resId);
         // 颜色名称,如 bg_button
         String resName = originRes.getResourceEntryName (resId);
@@ -80,9 +79,9 @@ public abstract class AttrsHandler {
      * @return 当前皮肤包中尺寸
      */
     protected int getDimensionPixelSize(int resId){
-        Resources originRes= ResourcesManager.getInstance ().getOriginRes ();
-        Resources currentRes = ResourcesManager.getInstance ().getCurrentRes ();
-        String currentPkgName = ResourcesManager.getInstance ().getCurrentPkgName ();
+        Resources originRes= ResourcesManager.getInstance ().mOriginRes;
+        Resources currentRes = ResourcesManager.getInstance ().mCurrentRes;
+        String currentPkgName = ResourcesManager.getInstance ().mCurrentPkgName;
         int oldDimenPixelSize = originRes.getDimensionPixelSize (resId);
         String resName = originRes.getResourceEntryName (resId);
         int newId = currentRes.getIdentifier (resName, "dimen", currentPkgName);
@@ -92,7 +91,130 @@ public abstract class AttrsHandler {
         return currentRes.getDimensionPixelSize (newId);
     }
 
-    protected Drawable getDrawable(){
-        return null;
+    /**
+     * 从当前皮肤包拿到Drawable
+     * @param resId 原Drawable id
+     * @return 当前皮肤包中的drawable
+     */
+    protected Drawable getDrawable(int resId){
+        Resources originRes= ResourcesManager.getInstance ().mOriginRes;
+        Resources currentRes = ResourcesManager.getInstance ().mCurrentRes;
+        String currentPkgName = ResourcesManager.getInstance ().mCurrentPkgName;
+        Drawable oldDrawable = originRes.getDrawable(resId);
+        String resName = originRes.getResourceEntryName (resId);
+        int newId = currentRes.getIdentifier (resName, "drawable", currentPkgName);
+        if(newId == 0){
+            return oldDrawable;
+        }
+        return currentRes.getDrawable(newId);
     }
+
+    /**
+     * 从当前皮肤包拿到字符串
+     * @param resId 原资源id
+     * @return 当前皮肤包中的字符串
+     */
+    protected String getString(int resId){
+        Resources originRes= ResourcesManager.getInstance ().mOriginRes;
+        Resources currentRes = ResourcesManager.getInstance ().mCurrentRes;
+        String currentPkgName = ResourcesManager.getInstance ().mCurrentPkgName;
+        String old = originRes.getString(resId);
+        String resName = originRes.getResourceEntryName (resId);
+        int newId = currentRes.getIdentifier (resName, "string", currentPkgName);
+        if(newId == 0){
+            return old;
+        }
+        return currentRes.getString(newId);
+    }
+
+    /**
+     * 从当前皮肤包拿到数字
+     * @param resId 原资源id
+     * @return 当前皮肤包中的数字
+     */
+    protected int getInteger(int resId){
+        Resources originRes= ResourcesManager.getInstance ().mOriginRes;
+        Resources currentRes = ResourcesManager.getInstance ().mCurrentRes;
+        String currentPkgName = ResourcesManager.getInstance ().mCurrentPkgName;
+        int old = originRes.getInteger(resId);
+        String resName = originRes.getResourceEntryName (resId);
+        int newId = currentRes.getIdentifier (resName, "integer", currentPkgName);
+        if(newId == 0){
+            return old;
+        }
+        return currentRes.getInteger(newId);
+    }
+
+    /**
+     * 从当前皮肤包拿到bool
+     * @param resId 原资源id
+     * @return 当前皮肤包中的bool
+     */
+    protected boolean getBoolean(int resId){
+        Resources originRes= ResourcesManager.getInstance ().mOriginRes;
+        Resources currentRes = ResourcesManager.getInstance ().mCurrentRes;
+        String currentPkgName = ResourcesManager.getInstance ().mCurrentPkgName;
+        boolean old = originRes.getBoolean(resId);
+        String resName = originRes.getResourceEntryName (resId);
+        int newId = currentRes.getIdentifier (resName, "bool", currentPkgName);
+        if(newId == 0){
+            return old;
+        }
+        return currentRes.getBoolean(newId);
+    }
+
+    /**
+     * 从当前皮肤包拿到字符串数组
+     * @param resId 原资源id
+     * @return 当前皮肤包中的字符串数组
+     */
+    protected String[] getStringArray(int resId){
+        Resources originRes= ResourcesManager.getInstance ().mOriginRes;
+        Resources currentRes = ResourcesManager.getInstance ().mCurrentRes;
+        String currentPkgName = ResourcesManager.getInstance ().mCurrentPkgName;
+        String[] old = originRes.getStringArray(resId);
+        String resName = originRes.getResourceEntryName (resId);
+        int newId = currentRes.getIdentifier (resName, "array", currentPkgName);
+        if(newId == 0){
+            return old;
+        }
+        return currentRes.getStringArray(newId);
+    }
+
+    /**
+     * 从当前皮肤包拿到int数组
+     * @param resId 原资源id
+     * @return 当前皮肤包中的int数组
+     */
+    protected int[] getIntArray(int resId){
+        Resources originRes= ResourcesManager.getInstance ().mOriginRes;
+        Resources currentRes = ResourcesManager.getInstance ().mCurrentRes;
+        String currentPkgName = ResourcesManager.getInstance ().mCurrentPkgName;
+        int[] old = originRes.getIntArray(resId);
+        String resName = originRes.getResourceEntryName (resId);
+        int newId = currentRes.getIdentifier (resName, "array", currentPkgName);
+        if(newId == 0){
+            return old;
+        }
+        return currentRes.getIntArray(newId);
+    }
+
+    /**
+     * 从当前皮肤包拿到分数
+     * @param resId 原资源id
+     * @return 当前皮肤包中的分数
+     */
+    protected float getFraction(int resId){
+        Resources originRes= ResourcesManager.getInstance ().mOriginRes;
+        Resources currentRes = ResourcesManager.getInstance ().mCurrentRes;
+        String currentPkgName = ResourcesManager.getInstance ().mCurrentPkgName;
+        float old = originRes.getFraction(resId, 1, 1);
+        String resName = originRes.getResourceEntryName (resId);
+        int newId = currentRes.getIdentifier (resName, "array", currentPkgName);
+        if(newId == 0){
+            return old;
+        }
+        return currentRes.getFraction(newId, 1, 1);
+    }
+
 }

@@ -12,7 +12,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!"
-        android:textColor="@color/main_text_0_color"
         skinning:enable="true"/>
 
     <TextView

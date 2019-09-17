@@ -1,7 +1,9 @@
 <resources>
 
-    <color name="main_text_0_color">#ff0000</color>
-    <color name="main_text_1_color">#00ff00</color>
-    <color name="main_button_color">#0000ff</color>
+    <color name="main_text_0_text_color">#00ff00</color>
+    <color name="main_text_0_bg_color">#ff0000</color>
+    <dimen name="main_text_0_padding">30dp</dimen>
+    <dimen name="main_text_0_text_size">20sp</dimen>
+    <string name="main_text_0_text">hello world!</string>
 
 </resources>

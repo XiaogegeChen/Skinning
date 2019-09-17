@@ -1,13 +1,10 @@
-package com.github.xiaogegechen.library.manager;
+package com.github.xiaogegechen.library;
 
 import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.xiaogegechen.library.model.Attr;
-import com.github.xiaogegechen.library.AttrsHandler;
-import com.github.xiaogegechen.library.ISkinningListener;
-import com.github.xiaogegechen.library.LogUtils;
 
 import java.util.HashMap;
 import java.util.List;

@@ -6,8 +6,6 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.github.xiaogegechen.library.manager.AttrsHandlerManager;
-import com.github.xiaogegechen.library.manager.CachedViewManager;
 import com.github.xiaogegechen.library.model.Attr;
 
 import java.util.ArrayList;
@@ -61,12 +59,14 @@ public class MyFactory2 implements LayoutInflater.Factory2 {
     }
 
     // 把attrs转化为List<Attr>
-    private List<Attr> convertAttributeSet2AttrList(AttributeSet attrs){
+    private static List<Attr> convertAttributeSet2AttrList(AttributeSet attrs){
         // 遍历attrs拿到属性
         List<Attr> attrList = new ArrayList<> ();
         int count = attrs.getAttributeCount ();
         for (int i = 0; i < count; i++) {
+            // 属性名
             String attrName = attrs.getAttributeName (i);
+            // 属性值
             String attrValue = attrs.getAttributeValue (i);
             Attr attr = new Attr (attrName, attrValue);
             attrList.add (attr);
@@ -75,7 +75,7 @@ public class MyFactory2 implements LayoutInflater.Factory2 {
     }
 
     // 使用当前资源包处理view属性
-    private void handleViewAttrs(View view, AttributeSet attrs){
+    private static void handleViewAttrs(View view, AttributeSet attrs){
         List<Attr> attrList = convertAttributeSet2AttrList (attrs);
         List<AttrsHandler> attrsHandlerList = AttrsHandlerManager.getInstance ().getAttrsHandlerList ();
         for (AttrsHandler attrsHandler : attrsHandlerList) {

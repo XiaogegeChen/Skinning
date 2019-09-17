@@ -1,8 +1,6 @@
-package com.github.xiaogegechen.library.manager;
+package com.github.xiaogegechen.library;
 
 import androidx.annotation.NonNull;
-
-import com.github.xiaogegechen.library.AttrsHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,10 +30,18 @@ public class AttrsHandlerManager {
     // 属性处理器集合
     private List<AttrsHandler> mAttrsHandlerList;
 
+    /**
+     * 批量添加属性处理器
+     * @param attrsHandlerList 集合
+     */
     public void addAttrsHandlers(@NonNull List<AttrsHandler> attrsHandlerList){
         mAttrsHandlerList.addAll (attrsHandlerList);
     }
 
+    /**
+     * 添加属性处理器
+     * @param handler 单个处理器
+     */
     public void addAttrsHandler(@NonNull AttrsHandler handler){
         if(!mAttrsHandlerList.contains (handler)){
             mAttrsHandlerList.add (handler);

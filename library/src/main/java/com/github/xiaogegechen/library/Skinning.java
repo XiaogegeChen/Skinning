@@ -6,13 +6,14 @@ import android.view.View;
 
 import androidx.core.view.LayoutInflaterCompat;
 
+import com.github.xiaogegechen.library.impl.ImageViewHandler;
 import com.github.xiaogegechen.library.impl.SkinningListenerAdapter;
-import com.github.xiaogegechen.library.impl.TextColorHandler;
-import com.github.xiaogegechen.library.manager.AttrsHandlerManager;
-import com.github.xiaogegechen.library.manager.CachedViewManager;
-import com.github.xiaogegechen.library.manager.ResourcesManager;
+import com.github.xiaogegechen.library.impl.TextViewHandler;
+import com.github.xiaogegechen.library.impl.ViewHandler;
+import com.github.xiaogegechen.library.model.Attr;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,20 +32,28 @@ public enum Skinning {
 
     /**
      * 初始化
-     * @param context application 级别的context
+     * @param context context
+     * @param addDefaultAttrsHandlers 是否把默认的AttrsHandlers添加进去
      */
-    public void init(Context context){
+    public void init(Context context, boolean addDefaultAttrsHandlers){
         mApplicationContext = context;
-        initAttrsHandlerManager ();
         initResourcesManager ();
+        if(addDefaultAttrsHandlers){
+            initAttrsHandlerManager ();
+        }
     }
 
     private void initAttrsHandlerManager(){
-        AttrsHandlerManager.getInstance ().addAttrsHandler (new TextColorHandler ());
+        // 默认的 AttrsHandler
+        List<AttrsHandler> attrsHandlerList = new ArrayList<>();
+        attrsHandlerList.add(new ViewHandler());
+        attrsHandlerList.add(new TextViewHandler());
+        attrsHandlerList.add(new ImageViewHandler());
+        AttrsHandlerManager.getInstance ().addAttrsHandlers (attrsHandlerList);
     }
 
     private void initResourcesManager(){
-        ResourcesManager.getInstance ().init (mApplicationContext);
+        ResourcesManager.getInstance().init (mApplicationContext);
     }
 
     /**
@@ -107,6 +116,11 @@ public enum Skinning {
     public void removeView(Activity activity, View view){
         // 从该activity种删除view
         CachedViewManager.getInstance ().removeViewFromTarget (activity, view);
+    }
+
+    public void addView(Activity target, View view, List<Attr> attrs){
+        // 向该activity添加view
+        CachedViewManager.getInstance ().addViewToTarget(target, view, attrs);
     }
 
     private void checkInit(){

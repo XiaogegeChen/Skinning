@@ -1,4 +1,4 @@
-package com.github.xiaogegechen.library.manager;
+package com.github.xiaogegechen.library;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
@@ -6,25 +6,21 @@ import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
 
-import com.github.xiaogegechen.library.Consts;
-import com.github.xiaogegechen.library.ISkinningListener;
-import com.github.xiaogegechen.library.LogUtils;
-
 import java.io.File;
 import java.lang.reflect.Method;
 
 /**
- * 资源管理类，单例
+ * 资源管理类
  */
 public class ResourcesManager {
 
     private static volatile ResourcesManager sInstance;
 
     public static ResourcesManager getInstance(){
-        if (sInstance == null) {
+        if(sInstance == null){
             synchronized (ResourcesManager.class){
                 if (sInstance == null) {
-                    sInstance = new ResourcesManager ();
+                    sInstance = new ResourcesManager();
                 }
             }
         }
@@ -32,33 +28,21 @@ public class ResourcesManager {
     }
 
     // 原始资源
-    private Resources mOriginRes;
+    Resources mOriginRes;
     // 当前皮肤包资源
-    private Resources mCurrentRes;
+    Resources mCurrentRes;
     // 当前皮肤包包名
-    private String mCurrentPkgName;
+    String mCurrentPkgName;
 
-    private Context mContext;
+    private Context mApplicationContext;
 
     private ResourcesManager(){
     }
 
-    public void init(Context context){
-        mContext = context;
-        mOriginRes = mContext.getResources ();
+    public void init(Context applicationContext){
+        mApplicationContext = applicationContext;
+        mOriginRes = mApplicationContext.getResources ();
         mCurrentRes = mOriginRes;
-    }
-
-    public Resources getOriginRes() {
-        return mOriginRes;
-    }
-
-    public Resources getCurrentRes() {
-        return mCurrentRes;
-    }
-
-    public String getCurrentPkgName(){
-        return mCurrentPkgName;
     }
 
     /**
@@ -84,7 +68,7 @@ public class ResourcesManager {
             return null;
         }
         try {
-            PackageManager pm = mContext.getPackageManager ();
+            PackageManager pm = mApplicationContext.getPackageManager ();
             PackageInfo pi = pm.getPackageArchiveInfo (skinFile.getAbsolutePath (), PackageManager.GET_ACTIVITIES);
             mCurrentPkgName = pi.packageName;
             AssetManager assetManager = AssetManager.class.newInstance();

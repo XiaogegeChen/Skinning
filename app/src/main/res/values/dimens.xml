@@ -2,4 +2,5 @@
 <resources>
     <dimen name="text_size">50dp</dimen>
     <dimen name="magrin_left">30dp</dimen>
+
 </resources>
