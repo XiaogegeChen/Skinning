@@ -1,7 +1,9 @@
 package com.github.xiaogegechen.library;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.util.TypedValue;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -11,6 +13,12 @@ import com.github.xiaogegechen.library.model.Attr;
 import java.util.List;
 
 public abstract class AttrsHandler {
+
+    protected static Context sApplicationContext;
+
+    public static void init(Context applicationContext){
+        sApplicationContext = applicationContext;
+    }
 
     /**
      * 处理view的属性值，从而更新view，这个方法需要你从attrList中拿到你需要处理的
@@ -43,13 +51,17 @@ public abstract class AttrsHandler {
     }
 
     /**
-     * 判断属性是不是目标属性
-     * @param attr 属性
-     * @param target 目标属性名
-     * @return 如果是返回true,否则false
+     * 从当前的皮肤包中拿到新的id
+     * @param resId 旧的id
+     * @return 新的id，0无效.有可能是0，使用者需要检查。
      */
-    protected boolean attrIsTarget(@NonNull Attr attr,@NonNull String target){
-        return target.equals (attr.getAttrName ());
+    protected int getId(int resId){
+        Resources originRes = ResourcesManager.getInstance ().mOriginRes;
+        Resources currentRes = ResourcesManager.getInstance ().mCurrentRes;
+        String currentPkgName = ResourcesManager.getInstance ().mCurrentPkgName;
+        String resName = originRes.getResourceEntryName (resId);
+        String attrTypeName = originRes.getResourceTypeName(resId);
+        return currentRes.getIdentifier (resName, attrTypeName, currentPkgName);
     }
 
     /**
@@ -215,6 +227,28 @@ public abstract class AttrsHandler {
             return old;
         }
         return currentRes.getFraction(newId, 1, 1);
+    }
+
+    /**
+     * 从当前皮肤包拿到浮点数
+     * @param resId 原资源id
+     * @return 当前皮肤包中的浮点数
+     */
+    protected float getFloat(int resId){
+        Resources originRes= ResourcesManager.getInstance ().mOriginRes;
+        Resources currentRes = ResourcesManager.getInstance ().mCurrentRes;
+        String currentPkgName = ResourcesManager.getInstance ().mCurrentPkgName;
+        TypedValue typedValue = new TypedValue();
+        originRes.getValue(resId, typedValue, true);
+        float old = typedValue.getFloat();
+        String resName = originRes.getResourceEntryName (resId);
+        int newId = currentRes.getIdentifier (resName, "dimen", currentPkgName);
+        if(newId == 0){
+            return old;
+        }
+        TypedValue newTypedValue = new TypedValue();
+        currentRes.getValue(resId, newTypedValue, true);
+        return newTypedValue.getFloat();
     }
 
 }

@@ -38,6 +38,7 @@ public enum Skinning {
     public void init(Context context, boolean addDefaultAttrsHandlers){
         mApplicationContext = context;
         initResourcesManager ();
+        initAttrsHandler();
         if(addDefaultAttrsHandlers){
             initAttrsHandlerManager ();
         }
@@ -54,6 +55,10 @@ public enum Skinning {
 
     private void initResourcesManager(){
         ResourcesManager.getInstance().init (mApplicationContext);
+    }
+
+    private void initAttrsHandler(){
+        AttrsHandler.init(mApplicationContext);
     }
 
     /**

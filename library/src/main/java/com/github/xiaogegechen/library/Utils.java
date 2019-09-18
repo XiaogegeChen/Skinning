@@ -30,6 +30,30 @@ public class Utils {
             case "string":
                 attrType = Attr.TYPE_STRING;
                 break;
+            case "bool":
+                attrType = Attr.TYPE_BOOL;
+                break;
+            case "integer":
+                attrType = Attr.TYPE_INTEGER;
+                break;
+            case "anim":
+                attrType = Attr.TYPE_ANIM;
+                break;
+            case "style":
+                attrType = Attr.TYPE_STYLE;
+                break;
+            case "fraction":
+                attrType = Attr.TYPE_FRACTION;
+                break;
+            case "menu":
+                attrType = Attr.TYPE_MENU;
+                break;
+            case "raw":
+                attrType = Attr.TYPE_RAW;
+                break;
+            case "interpolator":
+                attrType = Attr.TYPE_INTERPOLATOR;
+                break;
             default:
                 break;
         }
